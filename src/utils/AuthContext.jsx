@@ -10,7 +10,8 @@ export const AuthContextProvider = ({ children }) => {
     const logIn = async (email, password) => {
         try {
             const userCred = await signInWithEmailAndPassword(auth, email, password)
-       setCurrentUser(userCred.user)
+          setCurrentUser(userCred.user)
+          console.log("user")
         } catch (error) {
             console.error(error.message)
         }

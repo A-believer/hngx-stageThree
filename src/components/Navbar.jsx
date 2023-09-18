@@ -7,12 +7,12 @@ export default function Navbar() {
   const [search, setSearch] = useState("")
   return (
     <nav className="flex justify-between mb-10 items-center">
-      <Link to={`/`} className="flex sm:text-4xl text-xl items-center italic ">myIG</Link>
+      <Link to={`/`} className="flex sm:text-4xl text-xl items-center italic animate-pulse transition-all duration-1000 font-black tracking-tighter">myIG</Link>
       <label htmlFor="search" className="relative border pl-2 py-1.5 rounded-md">
         <input
           value={search}
-          onChange={(e) => e.target.value}
-          className="bg-transparent text-white w-full h-full placeholder:text-white"
+          onChange={(e) => setSearch(e.target.value)}
+          className="bg-transparent text-white w-full h-full placeholder:text-white outline-none"
           placeholder="search tags..."
           type="text" name="search"
           id="search" />
