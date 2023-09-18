@@ -5,7 +5,15 @@ export default {
     "./src/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
-    extend: {},
+     fontFamily: {
+      'playfair': 'Playfair Display, serif',
+      'poppins': 'Poppins, sans-serif',
+    },
+    extend: {
+      backgroundImage: {
+      "heroBg": "url('src/assets/heroBg.jpg')"
+    },
+    },
   },
   plugins: [],
 }
