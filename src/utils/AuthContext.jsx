@@ -39,7 +39,8 @@ export const AuthContextProvider = ({ children }) => {
     })
 
    return () => {unsubscribe()}
-  }, [])        
+    }, [])   
+  
     const value = { logIn, currentUser, loading, logout }
     return (
     <UserContext.Provider value={value}>

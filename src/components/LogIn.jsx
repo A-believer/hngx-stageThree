@@ -31,6 +31,8 @@ export default function LogIn() {
         navigate('/')
        toast.success("You're logged!")
         setFormData(initialFormData)
+    } else {
+        setError(true)
        }
     
  }
@@ -38,27 +40,30 @@ export default function LogIn() {
 
   return (
       <section className="md:h-[73.2vh] h-full w-full flex flex-col justify-center items-center gap-y-14 my-20 sm:my-0">
-          <h2 className="text-2xl font-bold">Enter Login Details</h2>
-
+          <div>
+              <h2 className="text-2xl font-bold">Enter Login Details</h2>
+            {error && <p className="text-red-600 center font-playfair text-sm italic text-center font-bold">Incorrect login details!!</p>}
+          </div>
+          
           <form
               onSubmit={handleLogin}
               className="flex flex-col gap-y-10">
-              <label htmlFor="email" className="border-2 pl-2 rounded-md w-[300px] md:w-[500px] h-[40px]">
+              <label htmlFor="email" className="w-[300px] md:w-[500px] h-[40px]">
                   <input
                       value={formData.email}
                       onChange={handleChange}
                       placeholder="enter your email..."
-                      className="bg-transparent text-white w-full h-full placeholder:text-white outline-none py-2 px-1"
+                      className=" border-2 pl-2 rounded-md bg-transparent text-white w-full h-full placeholder:text-white outline-none py-2 px-1"
                       type="email"
                       name="email"
                       id="email" />
               </label>
-              <label htmlFor="password" className="border-2 pl-2 rounded-md w-[300px] md:w-[500px] h-[40px]">
+              <label htmlFor="password" className="w-[300px] md:w-[500px] h-[40px]">
                   <input
                       value={formData.password}
                       onChange={handleChange}
                       placeholder="enter your password..."
-                      className="bg-transparent text-white w-full h-full placeholder:text-white outline-none py-2 px-1"
+                      className=" border-2 pl-2 rounded-md bg-transparent text-white w-full h-full placeholder:text-white outline-none py-2 px-1"
                       type="password"
                       name="password"
                       id="password" />

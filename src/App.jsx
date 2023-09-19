@@ -8,7 +8,7 @@ import { useEffect } from "react";
 
 export default function App() {
   const navigate = useNavigate()
-  const { currentUser } = UserAuth()
+  const { currentUser, loading } = UserAuth()
   
   useEffect(() => {
  if (!currentUser) {
@@ -16,19 +16,18 @@ export default function App() {
   } else {
     navigate("/")
   }
-  
   }, [currentUser, navigate])
 
  
   return (
-    <main className="bg-heroBg bg-cover bg-no-repeat text-white w-full h-fullfont-poppins">
-      <div className="bg-black/50  px-4 md:px-10 sm:px-20  sm:py-8 py-5 w-full">
-         <Navbar/>
-      <Routes>
-      <Route path="/" element={<Gallery/>}/>
-      <Route path="/login" element={<LogIn/>}/>
-      </Routes>
-      <Footer />
+    <main className="bg-heroBg bg-cover bg-fixed bg-no-repeat text-white w-full h-full font-poppins">
+      <div className="bg-black/80  px-5 sm:px-10 lg:px-20 sm:py-8 py-5 w-full">
+        <Navbar/>
+        <Routes>
+          <Route path="/" element={<Gallery/>}/>
+          <Route path="/login" element={<LogIn/>}/>
+        </Routes>
+        <Footer />
       </div>
     </main>
     

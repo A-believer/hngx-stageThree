@@ -1,12 +1,11 @@
-import { useState } from "react"
-import {imageData} from "../utils/imageData"
+import { useState } from "react";
+import {AiOutlineCloseSquare} from "react-icons/ai"
 
-export default function Gallery() {
-  const [item, setItem] = useState(imageData)
+export default function Search({ filteredImages, setLoading, searchKey }) {
+    const [item, setItem] = useState(filteredImages)
    const [draggedItem, setDraggedItem] = useState(null);
-
- 
- const handleDragStart = (e, index) => {
+    
+     const handleDragStart = (e, index) => {
     setDraggedItem(index);
     e.dataTransfer.effectAllowed = 'move';
     e.dataTransfer.setData('text/html', e.target.innerHTML);
@@ -30,18 +29,14 @@ export default function Gallery() {
   const handleDragEnd = () => {
     setDraggedItem(null);
   };
-
-
   return (
-    <section className="w-full font-poppins md:pt-2 pt-0 pb-16 ">
-      
-      <div className="text-center flex flex-col gap-y-1 md:my-10 my-5">
-        <h3 className="font-semibold md:text-3xl">Welcome to my Image Gallery</h3>
-        <p className="text-sm italic text-pink-400">Try moving things arounds</p>
-      </div>
+      <div className="absolute sm:top-[150px] top-[80px] left-0 w-full bg-black rounded-xl py-10 z-[99]">
+          <AiOutlineCloseSquare className="absolute top-5 right-8 text-xl w-fit" onClick={setLoading} />
+          <h2 className="sm:text-2xl text-lg sm:pl-28 pl-16 text-left">Search results for <span className="italic text-red-500">{searchKey}</span></h2>
+          <h3 className="text-sm text-center italic text-pink-400 font-bold py-5 underline">You can move things around here too</h3>
 
-      <div className="flex items-center justify-center flex-wrap sm:gap-10 gap-5">
-        {item?.map((img, index) => (
+           <div className="flex items-center justify-center flex-wrap sm:gap-10 gap-5">
+        {item.map((img, index) => (
           <div
             draggable="true"
            onDragStart={(e) => handleDragStart(e, index)}
@@ -54,10 +49,10 @@ export default function Gallery() {
               src={img.source}
               alt={img.info}
               className="w-full h-full object-cover rounded-lg" />
-            <p className="absolute top-2 right-4 text-pink-600 font-bold text-lg bg-black/50 px-2 rounded-md object-center">{img.tag}</p>
+          
           </div>
         ))}
       </div>
-    </section>
+    </div>
   )
 }
