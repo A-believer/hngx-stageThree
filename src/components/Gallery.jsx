@@ -47,9 +47,11 @@ export default function Gallery() {
            onDragStart={(e) => handleDragStart(e, index)}
           onDragEnter={(e) => handleDragEnter(e, index)}
           onDragOver={(e) => handleDragOver(e)}
-          onDragEnd={handleDragEnd}
+            onDragEnd={handleDragEnd}
+            onTouchStart={(e) => handleDragStart(e, index)}
+            onTouchMove={(e) => handleDragOver(e, index)}
             key={img.id}
-            className={`z-[1] transition-all ease-in duration-200 md:w-[200px] lg:w-[300px] xl:w-[350px] w-[130px] md:h-[200px] lg:h-[300px] xl:h-[350px] h-[130px] rounded-lg border-2 border-white/30 relative cursor-grab`}>
+            className={`z-[1] transition-all ease-in duration-200 md:w-[200px] lg:w-[300px] xl:w-[350px] w-[130px] md:h-[200px] lg:h-[300px] xl:h-[350px] h-[130px] rounded-lg border-2 border-white/30 relative cursor-grab touch-none`}>
             <img
               src={img.source}
               alt={img.info}
