@@ -11,10 +11,10 @@ export default function App() {
   const { currentUser, loading } = UserAuth()
   
   useEffect(() => {
- if (!currentUser) {
-   navigate("/login")
+ if (currentUser) {
+   navigate("/")
   } else {
-    navigate("/")
+    navigate("/login")
   }
   }, [currentUser, navigate])
 
