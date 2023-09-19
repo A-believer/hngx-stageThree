@@ -39,7 +39,7 @@ export default function LogIn() {
 
 
   return (
-      <section className="md:h-[73.2vh] h-full w-full flex flex-col justify-center items-center gap-y-14 my-20 sm:my-0">
+      <section className="md:h-[73.2vh] h-screen w-full flex flex-col justify-center items-center gap-y-14 my-20 sm:my-0">
           <div>
               <h2 className="text-2xl font-bold">Enter Login Details</h2>
             {error && <p className="text-red-600 center font-playfair text-sm italic text-center font-bold">Incorrect login details!!</p>}
@@ -48,7 +48,7 @@ export default function LogIn() {
           <form
               onSubmit={handleLogin}
               className="flex flex-col gap-y-10">
-              <label htmlFor="email" className="w-[300px] md:w-[500px] h-[40px]">
+              <label htmlFor="email" className=" w-[300px] md:w-[500px] h-[40px]">
                   <input
                       value={formData.email}
                       onChange={handleChange}
