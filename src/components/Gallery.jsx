@@ -37,7 +37,7 @@ export default function Gallery() {
       
       <div className="text-center flex flex-col gap-y-1 md:my-10 my-5">
         <h3 className="font-semibold md:text-3xl">Welcome to my Image Gallery</h3>
-        <p className="text-sm italic text-pink-400">Try moving things arounds</p>
+        <p className="text-sm italic text-pink-400">Use your mouse to move things arounds</p>
       </div>
 
       <div className="flex items-center justify-center flex-wrap sm:gap-10 gap-5">
