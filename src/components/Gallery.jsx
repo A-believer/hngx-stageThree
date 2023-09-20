@@ -1,35 +1,28 @@
 import { useState } from "react"
 import {imageData} from "../utils/imageData"
+import Images from "./Images";
+import { DndContext, closestCenter } from "@dnd-kit/core";
+import { SortableContext, arrayMove, arraySwap, rectSwappingStrategy} from "@dnd-kit/sortable";
 
 export default function Gallery() {
   const [item, setItem] = useState(imageData)
-   const [draggedItem, setDraggedItem] = useState(null);
 
- 
- const handleDragStart = (e, index) => {
-    setDraggedItem(index);
-    e.dataTransfer.effectAllowed = 'move';
-    e.dataTransfer.setData('text/html', e.target.innerHTML);
-  };
+  
+  function handleDragEnd(event) {
+    console.log("Drag end called");
+    const { active, over } = event;
+    console.log("ACTIVE: " + active.id);
+    console.log("OVER :" + over.id);
 
-  const handleDragEnter = (e, index) => {
-    e.preventDefault();
-    if (index !== draggedItem) {
-      const newList = [...item];
-      newList.splice(draggedItem, 1);
-      newList.splice(index, 0, item[draggedItem]);
-      setItem(newList);
-      setDraggedItem(index);
+    if (active.id !== over.id) {
+      setItem((users) => {
+      const oldIndex = users.findIndex((user) => user.id === active.id);
+      const newIndex = users.findIndex((user) => user.id === over.id);
+      return arrayMove(users, oldIndex, newIndex);
+    });
+      
     }
-  };
-
-  const handleDragOver = (e) => {
-    e.preventDefault();
-  };
-
-  const handleDragEnd = () => {
-    setDraggedItem(null);
-  };
+  }
 
 
   return (
@@ -40,26 +33,25 @@ export default function Gallery() {
         <p className="text-sm italic text-pink-400">Use your mouse to move things arounds</p>
       </div>
 
-      <div className="flex items-center justify-center flex-wrap sm:gap-10 gap-5">
+      <DndContext
+      collisionDetection={closestCenter}
+      onDragEnd={handleDragEnd}>
+        <SortableContext
+          items={item}
+          strategy={rectSwappingStrategy}
+          reorderItems={arraySwap}
+          >
+          <div className="flex items-center justify-center flex-wrap sm:gap-10 gap-5">
         {item?.map((img, index) => (
-          <div
-            draggable="true"
-           onDragStart={(e) => handleDragStart(e, index)}
-          onDragEnter={(e) => handleDragEnter(e, index)}
-          onDragOver={(e) => handleDragOver(e)}
-            onDragEnd={handleDragEnd}
-            onTouchStart={(e) => handleDragStart(e, index)}
-            onTouchMove={(e) => handleDragOver(e, index)}
-            key={img.id}
-            className={`z-[1] transition-all ease-in duration-200 md:w-[200px] lg:w-[300px] xl:w-[350px] w-[130px] md:h-[200px] lg:h-[300px] xl:h-[350px] h-[130px] rounded-lg border-2 border-white/30 relative cursor-grab touch-none`}>
-            <img
-              src={img.source}
-              alt={img.info}
-              className="w-full h-full object-cover rounded-lg" />
-            <p className="absolute top-2 right-4 text-pink-600 font-bold text-lg bg-black/50 px-2 rounded-md object-center">{img.tag}</p>
-          </div>
+          <Images
+            getNewIndex={({ id, items, activeIndex, overIndex }) =>
+            arraySwap(items, activeIndex, overIndex).indexOf(id)}
+            key={index} id={img.id} source={img.source} info={img.info} tag={img.tag} />
         ))}
       </div>
+        </SortableContext>
+      </DndContext>
+      
     </section>
   )
 }
