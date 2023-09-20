@@ -52,7 +52,7 @@ let filteredData;
           placeholder="search tags..."
           type="text" name="search"
           id="search" />
-        <FaSearch className="absolute right-2 top-[6px]" onClick={handleSearch}/>
+        <FaSearch className="absolute right-2 top-[6px] cursor-pointer" onClick={handleSearch}/>
       </label>
         {currentUser &&
           <button
